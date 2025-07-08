@@ -1,0 +1,1575 @@
+/* ===== CSS VARIABLES (Tekrarları önlemek için) ===== */
+
+:root {
+    /* Border Radius Patterns */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-full: 50%;
+    
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-normal: all 0.3s ease;
+    --transition-slow: all 0.5s ease;
+    
+    /* Transforms */
+    --hover-lift-sm: translateY(-1px);
+    --hover-lift-md: translateY(-2px);
+    --hover-scale: scale(1.05);
+    --hover-scale-sm: scale(1.1);
+    
+    /* Shadows */
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.2);
+    --shadow-hover-sm: 0 2px 8px rgba(0,0,0,0.15);
+    
+    /* Spacing (sık kullanılan değerler) */
+    --space-xs: 4px;
+    --space-sm: 6px;
+    --space-md: 8px;
+    --space-lg: 12px;
+    --space-xl: 15px;
+    --space-2xl: 20px;
+    --space-3xl: 25px;
+    
+    /* Font Sizes */
+    --text-xs: 10px;
+    --text-sm: 12px;
+    --text-base: 14px;
+    --text-lg: 16px;
+    --text-xl: 18px;
+    --text-2xl: 20px;
+    --text-3xl: 22px;
+}
+
+/* ===== MIXIN-LIKE UTILITY CLASSES (Tekrarları önlemek için) ===== */
+
+/* Transitions */
+.transition-normal { transition: var(--transition-normal); }
+
+
+
+/* ====== GENEL BUTTON STİLLERİ ====== */
+
+/* Ana Buton Stili */
+.btn {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: var(--text-base);
+    padding: var(--space-lg) calc(var(--space-lg) * 2);
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    text-decoration: none;
+    box-sizing: border-box;
+    border-radius: var(--radius-md);
+}
+
+/* Button Hover Base Pattern */
+.btn-hover-primary:hover {
+    background-color: var(--primary-hover);
+    transform: var(--hover-lift-md);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-hover-secondary:hover {
+    transform: var(--hover-lift-sm);
+}
+
+/* Primary Buton */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: var(--hover-lift-md);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-primary:disabled {
+    background-color: var(--text-secondary);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Success Buton */
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: var(--success-hover);
+    transform: var(--hover-lift-md);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Warning Buton */
+.btn-warning {
+    background-color: var(--warning-color);
+    color: var(--warning-text);
+}
+
+.btn-warning:hover {
+    background-color: var(--warning-hover);
+    transform: var(--hover-lift-sm);
+}
+
+/* Danger Buton */
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+    transform: var(--hover-lift-sm);
+}
+
+/* Secondary Buton */
+.btn-secondary {
+    background-color: var(--text-secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+    transform: var(--hover-lift-sm);
+}
+
+/* Outline Buton */
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: var(--hover-lift-sm);
+}
+
+/* Buton Boyutları */
+.btn-sm {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--text-sm);
+    border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+    padding: var(--space-xl) calc(var(--space-xl) * 2);
+    font-size: var(--text-lg);
+    border-radius: var(--radius-lg);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* ====== MİNİ BUTONLAR (Kopyala, Görünürlük vb.) ====== */
+
+.btn-mini {
+    border: none;
+    cursor: pointer;
+    font-size: var(--text-lg);
+    padding: var(--space-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    transition: var(--transition-normal);
+    background-color: transparent;
+    border-radius: var(--radius-sm);
+}
+
+.btn-mini:hover {
+    transform: var(--hover-scale-sm);
+}
+
+.btn-mini-visible {
+    background-color: var(--info-bg);
+    color: var(--info-color);
+}
+
+.btn-mini-copied {
+    background-color: var(--success-bg);
+    color: var(--success-color);
+}
+
+/* ====== ÖZEL BUTONLAR ====== */
+
+/* AI Buton - Özel mor renk */
+.btn-ai {
+    background-color: #8B5CF6;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ai:hover {
+    background-color: #7C3AED;
+    transform: var(--hover-lift-sm);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+/* AI Badge */
+.ai-badge {
+    font-size: var(--text-xs);
+    background-color: rgba(255,255,255,0.2);
+    padding: 2px var(--space-sm);
+    border-radius: 10px;
+    margin-left: var(--space-xs);
+    font-weight: bold;
+}
+
+/* Theme Toggle Butonu - UNIFIED (Tek tanımlama) */
+.theme-toggle {
+    position: absolute;
+    top: var(--space-2xl);
+    left: var(--space-2xl);
+    background: none;
+    border: 2px solid var(--border-color);
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: var(--space-2xl);
+    transition: var(--transition-normal);
+    background-color: var(--surface-color);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background-color: var(--surface-secondary);
+    transform: var(--hover-scale);
+}
+
+/* ===== STRENGTh INDICATOR UNIFIED SYSTEM ===== */
+aştığımız sorunlar yenilikle
+.strength-icon {
+    font-size: var(--text-lg);
+}
+
+.strength-text {
+    font-size: var(--text-sm);
+    font-weight: bold;
+    min-width: 60px;
+    color: var(--strength-color);
+}
+
+
+
+/* Logout Butonu */
+.logout-btn {
+    position: absolute;
+    top: var(--space-2xl);
+    right: var(--space-2xl);
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    padding: var(--space-md) var(--space-lg);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: bold;
+    transition: var(--transition-normal);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logout-btn:hover {
+    background-color: var(--danger-hover);
+    transform: var(--hover-lift-sm);
+}
+
+/* ====== INPUT STİLLERİ ====== */
+
+.input {
+    width: 100%;
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+    font-size: var(--text-base);
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: var(--transition-normal);
+    border-radius: var(--radius-md);
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.input-sm {
+    padding: var(--space-md) 10px;
+    font-size: var(--text-sm);
+}
+
+/* Input with Icon Container */
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-with-actions {
+    padding-right: 80px;
+}
+
+.input-actions {
+    position: absolute;
+    right: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
+}
+
+/* ====== LABEL STİLLERİ ====== */
+
+.label {
+    display: block;
+    margin-bottom: var(--space-md);
+    font-weight: bold;
+    color: var(--text-color);
+    font-size: var(--text-base);
+}
+
+.label-lg {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-lg);
+}
+
+/* ====== KART STİLLERİ ====== */
+
+.card {
+    background-color: var(--surface-secondary);
+    padding: var(--space-2xl);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-normal);
+    border-radius: var(--radius-xl);
+}
+
+.card:hover {
+    transform: var(--hover-lift-md);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.card-body {
+    flex: 1;
+    margin-bottom: var(--space-xl);
+}
+
+.card-footer {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: auto;
+}
+
+/* ====== LAYOUT STİLLERİ ====== */
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-lg); }
+.gap-lg { gap: var(--space-2xl); }
+
+/* ====== SPACİNG UTİLİTİES ====== */
+
+/* Margin utilities - CSS Variables */
+.m-0 { margin: 0; }
+.mt-8 { margin-top: var(--space-md); }
+.mt-12 { margin-top: var(--space-lg); }
+.mt-15 { margin-top: var(--space-xl); }
+.mb-10 { margin-bottom: 10px; }
+.mb-15 { margin-bottom: var(--space-xl); }
+.mb-20 { margin-bottom: var(--space-2xl); }
+.mb-25 { margin-bottom: var(--space-3xl); }
+
+/* Padding utilities - CSS Variables */
+.p-10 { padding: 10px; }
+.p-12 { padding: var(--space-lg); }
+.pb-10 { padding-bottom: 10px; }
+.pb-15 { padding-bottom: var(--space-xl); }
+
+/* ====== LAYOUT UTİLİTİES ====== */
+
+.flex-1 { flex: 1; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-align-center { align-items: center; }
+
+/* ====== TYPOGRAPHY UTİLİTİES - CSS Variables ====== */
+
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.font-bold { font-weight: bold; }
+
+/* ====== CONTAINER UTİLİTİES ====== */
+
+.main-layout {
+    flex: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+}
+
+.form-container {
+    flex: 0 0 40%;
+    min-width: 400px;
+    max-width: 500px;
+    background-color: var(--background-color);
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.section-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    font-size: 22px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.transition-padding { transition: padding 0.2s ease; }
+
+/* ====== ŞİFRE BÖLÜMLERİ UTİLİTİES ====== */
+
+.passwords-container {
+    flex: 1 1 60%;
+    min-width: 500px;
+    background-color: var(--background-color);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.passwords-header {
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.passwords-header h2 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 22px;
+    width: 100%;
+    text-align: center;
+}
+
+.passwords-count {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.passwords-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.passwords-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.card-custom {
+    height: fit-content;
+    min-height: 160px;
+}
+
+.card-platform-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.platform-icon-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.platform-icon-size {
+    width: 20px;
+    height: 20px;
+}
+
+.platform-title {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: transparent;
+    color: var(--text-secondary);
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.empty-title {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.empty-subtitle {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Strength indicator improvements */
+.strength-dots-container {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.strength-dot-enhanced {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.strength-dot-enhanced.active {
+    transform: scale(1.1);
+}
+
+.strength-score-display {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    min-width: 35px;
+    text-align: right;
+}
+
+/* ====== KART İÇERİK UTİLİTİES ====== */
+
+.card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 12px;
+}
+
+.card-row-no-margin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.card-info-left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.card-icon {
+    font-size: 16px;
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.card-text {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.card-password-text {
+    color: var(--text-color);
+    font-size: 14px;
+    font-family: monospace;
+    font-weight: 500;
+    letter-spacing: normal;
+}
+
+.card-password-hidden {
+    letter-spacing: 2px;
+}
+
+.mini-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.spacer-btn {
+    width: 32px;
+    height: 32px;
+}
+
+.card-footer-buttons {
+    flex: 1;
+}
+
+/* ====== HEADER & MODAL UTİLİTİES ====== */
+
+.app-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background-color: var(--background-color);
+}
+
+.app-header {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.app-title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.modal-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.tab-icon {
+    font-size: 16px;
+}
+
+.icon-lg {
+    font-size: 26px;
+}
+
+.icon-md {
+    font-size: 20px;
+}
+
+.icon-base {
+    font-size: 18px;
+}
+
+.strength-indicator-form {
+    margin-top: 12px;
+}
+
+.strength-box-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background-color: var(--surface-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+.strength-info-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.strength-icon {
+    font-size: 16px;
+}
+
+.strength-text {
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 60px;
+    color: var(--strength-color);
+}
+
+/* ====== FORM & INPUT UTİLİTİES ====== */
+
+.slider-container {
+    width: 100%;
+    height: 8px;
+    margin-bottom: 12px;
+    accent-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: bold;
+}
+
+.label-lg {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.label-md {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.primary-color-text {
+    color: var(--primary-color);
+}
+
+/* ====== GENERATED PASSWORD DISPLAY ====== */
+
+.generated-password-box {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.password-display {
+    font-family: monospace;
+    font-size: 18px;
+    padding: 15px;
+    padding-right: 45px;
+    background-color: var(--surface-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    word-break: break-all;
+    color: var(--text-color);
+    letter-spacing: 1px;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+}
+
+.copy-btn-absolute {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+}
+
+.strength-indicator-generated {
+    margin-top: 15px;
+}
+
+.strength-box-generated {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    background-color: var(--surface-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.strength-info-generated {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.strength-text-generated {
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 70px;
+    color: var(--strength-color);
+}
+
+.strength-dots-generated {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.strength-dot-generated {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.strength-dot-generated.active {
+    background-color: var(--strength-color);
+    box-shadow: 0 0 6px var(--strength-color-alpha);
+}
+
+.strength-score-generated {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: bold;
+    background-color: var(--surface-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.modal-footer-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* ====== MİNİ ŞİFRE GÜCÜ GÖSTERGESİ ====== */
+
+.mini-strength-indicator {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.mini-strength-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    border: 1px solid #dee2e6;
+    box-shadow: none;
+}
+
+.mini-strength-dot.active {
+    border: 1px solid var(--strength-color);
+    box-shadow: 0 0 3px var(--strength-color-alpha);
+    background-color: var(--strength-color);
+}
+
+
+
+/* ====== PLATFORM GRİD ====== */
+
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.platform-item {
+    padding: 8px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    background-color: var(--surface-secondary);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-height: 50px;
+    justify-content: center;
+}
+
+.platform-item:hover {
+    background-color: var(--surface-hover);
+    transform: scale(1.02);
+}
+
+.platform-item.selected {
+    border-color: var(--primary-color);
+    background-color: var(--primary-bg);
+}
+
+.platform-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.platform-name {
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* ====== MODAL STİLLERİ ====== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+}
+
+.modal {
+    background-color: var(--surface-color);
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border: 2px solid var(--border-color);
+    position: relative;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-header {
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 15px;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background-color: var(--danger-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* ====== TAB STİLLERİ ====== */
+
+.tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+}
+
+.tab:hover {
+    background-color: var(--surface-secondary);
+}
+
+.tab.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* ====== RESPONSİVE ====== */
+
+@media (max-width: 768px) {
+    .platform-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .btn {
+        min-height: 44px;
+        padding: 12px;
+    }
+    
+    .input {
+        min-height: 44px;
+        font-size: 16px;
+    }
+    
+    .btn-mini {
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 14px;
+    }
+    
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        left: 10px;
+        top: 15px;
+    }
+    
+    .logout-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+        right: 10px;
+        top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .platform-grid {
+        gap: 6px;
+    }
+}
+
+/* ====== APP.CSS'DEN AKTARILAN STİLLER ====== */
+
+/* Root Container - Ana uygulama konteyneri */
+.app-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+
+
+/* Platform Logo'ları için not */
+/* Platform logo'ları artık SVG içinde gerçek renklerle geliyor */
+
+/* ====== GLOBAL SCROLLBAR STİLLERİ ====== */
+
+/* Global Scroll bar stilleri - Tüm scrollbar'lar için */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-secondary) transparent;
+}
+
+/* WebKit Scrollbar (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-secondary);
+    border-radius: 4px;
+    border: 2px solid var(--surface-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-color);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--surface-color);
+}
+
+/* Belirli alanlar için özel scrollbar */
+.form-section::-webkit-scrollbar,
+.passwords-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.form-section::-webkit-scrollbar-thumb,
+.passwords-section::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border: 1px solid var(--surface-color);
+}
+
+/* Smooth scroll davranışı */
+.form-section,
+.passwords-section,
+.main-content {
+    scroll-behavior: smooth;
+}
+
+/* Dokunmatik feedback */
+@media (max-width: 768px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    button, .clickable {
+        touch-action: manipulation;
+    }
+}
+
+/* ====== RESPONSİVE STİLLER ====== */
+
+@media (max-width: 768px) {
+    /* Ana layout mobilde */
+    .main-content {
+        flex-direction: column !important;
+        height: 100vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Form bölümü mobilde */
+    .form-section {
+        width: 100% !important;
+        flex-shrink: 0;
+        max-height: 50vh;
+        padding: 15px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        border-bottom: 2px solid rgba(0,0,0,0.1);
+    }
+    
+    /* Şifre listesi mobilde */
+    .passwords-section {
+        padding: 15px !important;
+        flex: 1;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        min-height: 0;
+    }
+    
+    /* Şifre kartları mobilde tek sütun */
+    .passwords-section > div:last-child > div {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    /* Platform seçicilerini mobilde daha az sütun */
+    .platform-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    /* Çıkış butonu mobilde küçük */
+    .logout-btn {
+        padding: 6px 10px !important;
+        font-size: 11px !important;
+        right: 10px !important;
+        top: 15px !important;
+    }
+    
+    /* Tema butonu mobilde küçük - Unified'dan gelecek */
+    
+    /* Başlık mobilde küçük */
+    h1 {
+        font-size: 24px !important;
+        margin: 0 60px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Küçük ekranlarda daha kompakt */
+    .form-section {
+        padding: 10px !important;
+        max-height: 50vh;
+    }
+    
+    .passwords-section {
+        padding: 10px !important;
+        max-height: 60vh;
+    }
+    
+    /* Platform grid mobilde 2 sütun */
+    .platform-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
+    
+    /* Butonlar mobilde daha büyük (touch-friendly) */
+    button[type="submit"], button[type="button"] {
+        min-height: 44px !important;
+        padding: 12px !important;
+    }
+    
+    /* Input alanları mobilde daha büyük */
+    input[type="text"], input[type="email"], input[type="password"] {
+        min-height: 44px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Şifre kartları mobilde */
+    .password-card {
+        transition: none !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Kopyalama butonları mobilde daha büyük */
+    .copy-btn, .visibility-btn {
+        min-width: 44px !important;
+        min-height: 44px !important;
+        font-size: 14px !important;
+    }
+    
+    /* Eylem butonları mobilde daha büyük */
+    .action-btn {
+        min-width: 44px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+    }
+}
+
+/* ====== LOGIN VE REGISTER ÖZEL STİLLERİ ====== */
+
+.login-title, .register-title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.login-container, .register-container {
+    background-color: var(--surface-color);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    border: 1px solid var(--border-color);
+}
+
+.login-container {
+    max-width: 400px;
+}
+
+.register-container {
+    max-width: 450px;
+}
+
+/* Data-attributes ile dinamik renkler */
+.strength-info-form[data-strength-color] {
+    color: var(--strength-color);
+}
+
+.strength-dot-enhanced[data-dot-active="true"] {
+    background-color: var(--strength-color);
+    box-shadow: 0 0 8px var(--strength-color-alpha);
+}
+
+.strength-dot-enhanced[data-dot-active="false"] {
+    background-color: #e9ecef;
+    box-shadow: none;
+}
+
+.mini-strength-dot.active[data-strength-color] {
+    background-color: var(--strength-color);
+    box-shadow: 0 0 4px var(--strength-color-alpha);
+}
+
+.strength-info-generated[data-strength-color] {
+    color: var(--strength-color);
+}
+
+/* ===== AUTH PAGES (Login/Register) ===== */
+
+/* Ana Container */
+.auth-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Section */
+.auth-header {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.auth-title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* Theme Toggle Button - DUPLICATE REMOVED */
+
+/* Ana İçerik */
+.auth-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+/* Login/Register Container */
+.auth-container {
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Welcome Section */
+.auth-welcome {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-icon {
+    font-size: 64px;
+    margin-bottom: 15px;
+}
+
+.auth-welcome-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.auth-welcome-subtitle {
+    font-size: 14px;
+    margin: 10px 0 0 0;
+}
+
+/* Form Groups */
+.auth-form-group {
+    margin-bottom: 20px;
+}
+
+.auth-form-group.mb-25 {
+    margin-bottom: 25px;
+}
+
+.auth-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Input Container */
+.auth-input-container {
+    position: relative;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.auth-input.error {
+    border-width: 2px;
+}
+
+.auth-input.with-button {
+    padding-right: 45px;
+}
+
+/* Input Action Button (eye icon, etc.) */
+.auth-input-action {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+}
+
+/* Error Messages */
+.auth-error {
+    font-size: 12px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Submit Button */
+.auth-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.auth-submit:disabled {
+    cursor: not-allowed;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff40;
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Login Error Box */
+.auth-error-box {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Switch Auth Link */
+.auth-switch {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-switch-link {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Loading Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Register Specific Styles */
+.register-container {
+    max-width: 450px;
+}
+
+.register-submit {
+    margin-bottom: 15px;
+}
+
+.register-error-general {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .auth-container {
+        padding: 20px 15px;
+        max-width: 350px;
+    }
+    
+    .register-container {
+        padding: 20px 15px;
+        max-width: 380px;
+    }
+    
+    .auth-title {
+        font-size: 24px;
+    }
+}
