@@ -542,14 +542,30 @@
 @media (max-width: 768px) {
     .form-container h2,
     .passwords-container h2 {
+        font-size: 20px;
         min-height: 35px;
+        margin-bottom: 20px;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .passwords-count {
+        position: static;
+        font-size: 16px;
+        margin-top: 5px;
     }
 }
 
 @media (max-width: 480px) {
     .form-container h2,
     .passwords-container h2 {
+        font-size: 18px;
         min-height: 30px;
+        margin-bottom: 15px;
+    }
+
+    .passwords-count {
+        font-size: 14px;
     }
 }
 
@@ -1771,55 +1787,31 @@
 
 @media (max-width: 480px) {
     /* Küçük ekranlarda daha kompakt */
-    .form-section, .form-container {
-        padding: 10px !important;
-        max-height: 50vh;
-        width: 100% !important;
-        min-width: unset !important;
+    .form-section {
+        margin-top: 60px;
     }
-    
-    .passwords-section {
-        padding: 10px !important;
-        max-height: 60vh;
-        width: 100%;
+
+    .form-section h2 {
+        margin-bottom: 20px;
     }
-    
-    /* Platform grid mobilde 2 sütun */
+
+    .form-container {
+        padding-top: 15px;
+    }
+
+    /* Diğer mobil stiller korunacak */
     .platform-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 6px !important;
+        grid-template-columns: repeat(3, 1fr);
     }
-    
-    /* Butonlar mobilde daha büyük (touch-friendly) */
-    button[type="submit"], button[type="button"] {
-        min-height: 44px !important;
-        padding: 12px !important;
+
+    .platform-icon {
+        width: 14px;
+        height: 14px;
     }
-    
-    /* Input alanları mobilde daha büyük */
-    input[type="text"], input[type="email"], input[type="password"] {
-        min-height: 44px !important;
-        font-size: 16px !important;
-    }
-    
-    /* Şifre kartları mobilde */
-    .password-card {
-        transition: none !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-    }
-    
-    /* Kopyalama butonları mobilde daha büyük */
-    .copy-btn, .visibility-btn {
-        min-width: 44px !important;
-        min-height: 44px !important;
-        font-size: 14px !important;
-    }
-    
-    /* Eylem butonları mobilde daha büyük */
-    .action-btn {
-        min-width: 44px !important;
-        min-height: 44px !important;
-        padding: 8px 12px !important;
+
+    .platform-item {
+        padding: 6px;
+        min-height: 45px;
     }
 }
 
@@ -1887,12 +1879,16 @@
     padding: 20px;
     text-align: center;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .auth-title {
     margin: 0;
     font-size: 32px;
     font-weight: bold;
+    max-width: calc(100% - 100px);
 }
 
 /* Theme Toggle Button - DUPLICATE REMOVED */
@@ -2211,19 +2207,18 @@
 /* Auth sayfalarındaki dark mode butonu */
 .auth-header .theme-toggle {
     position: absolute;
-    top: 20px;
-    left: calc(var(--space-2xl) + 260px);
-    background: none;
-    border: none;
-    border-radius: 50%;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 40px;
     height: 40px;
-    cursor: pointer;
-    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
     color: var(--text-color);
 }
 
@@ -2236,14 +2231,20 @@
     color: var(--text-color);
 }
 
-@media (max-width: 768px) {
-    .auth-header .theme-toggle {
-        left: calc(var(--space-lg) + 180px);
-    }
-}
-
 @media (max-width: 480px) {
+    .auth-header {
+        padding: 15px;
+    }
+
+    .auth-title {
+        font-size: 24px;
+        max-width: calc(100% - 60px);
+    }
+
     .auth-header .theme-toggle {
-        left: calc(var(--space-md) + 120px);
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
     }
 }
