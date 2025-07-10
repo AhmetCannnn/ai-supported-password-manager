@@ -112,38 +112,15 @@ function Register({ onRegisterSuccess, onBackToLogin, theme, isDarkMode, toggleT
                  {/* Theme Toggle Butonu */}
          <button
            onClick={toggleTheme}
-           style={{
-             position: 'absolute',
-             top: '20px',
-             left: '20px',
-             background: 'none',
-             border: `2px solid ${theme.border}`,
-             borderRadius: '50%',
-             width: '50px',
-             height: '50px',
-             cursor: 'pointer',
-             fontSize: '20px',
-             display: 'flex',
-             alignItems: 'center',
-             justifyContent: 'center',
-             transition: 'all 0.3s',
-             backgroundColor: theme.surface
-           }}
            className="theme-toggle"
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = theme.surfaceSecondary;
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = theme.surface;
-          }}
-          title={isDarkMode ? 'Açık Tema' : 'Koyu Tema'}
-        >
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
+           title={isDarkMode ? 'Açık Tema' : 'Koyu Tema'}
+         >
+           {isDarkMode ? '☀️' : '🌙'}
+         </button>
 
-        <h1 className="auth-title">
-          🔐 Şifre Yöneticisi Kayıt
-        </h1>
+         <h1 className="auth-title">
+           🔐 Şifre Yöneticisi Kayıt
+         </h1>
       </div>
 
       {/* Ana İçerik */}

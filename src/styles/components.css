@@ -255,16 +255,18 @@
 }
 
 /* ===== STRENGTh INDICATOR UNIFIED SYSTEM ===== */
-aştığımız sorunlar yenilikle
+.strength-indicator-form,
+.strength-indicator-generated {
+    margin-top: var(--space-sm);
+}
+
 .strength-icon {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
 }
 
 .strength-text {
     font-size: var(--text-sm);
-    font-weight: bold;
     min-width: 60px;
-    color: var(--strength-color);
 }
 
 
@@ -450,111 +452,406 @@ aştığımız sorunlar yenilikle
 
 /* ====== CONTAINER UTİLİTİES ====== */
 
+/* Ana Layout */
 .main-layout {
     flex: 1;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 0;
     height: calc(100vh - 80px);
     overflow: hidden;
+    width: 100%;
+    margin-top: -35px;
 }
 
+@media (max-width: 768px) {
+    .main-layout {
+        margin-top: -15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-layout {
+        margin-top: -10px;
+    }
+}
+
+/* Form Container */
 .form-container {
     flex: 0 0 40%;
-    min-width: 400px;
-    max-width: 500px;
     background-color: var(--background-color);
     padding: 25px;
     overflow-y: auto;
+    width: 100%;
+    max-width: 500px;
 }
 
-.section-title {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: var(--text-color);
-    font-size: 22px;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 10px;
-}
-
-.transition-padding { transition: padding 0.2s ease; }
-
-/* ====== ŞİFRE BÖLÜMLERİ UTİLİTİES ====== */
-
+.form-container,
 .passwords-container {
-    flex: 1 1 60%;
-    min-width: 500px;
+    padding-top: 140px;
+}
+
+.form-container h2,
+.passwords-container h2 {
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    min-height: 40px;
+}
+
+.form-container h2 span:first-of-type,
+.passwords-container h2 span:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.passwords-count {
+    font-size: 18px;
+    color: var(--primary-color);
+    font-weight: 500;
+    position: absolute;
+    right: 24px;
+}
+
+.form-container h2::before,
+.passwords-container h2::before {
+    content: '';
+    display: none;
+}
+
+.form-container h2::after,
+.passwords-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #4ade80;
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .form-container h2,
+    .passwords-container h2 {
+        min-height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container h2,
+    .passwords-container h2 {
+        min-height: 30px;
+    }
+}
+
+/* Platform grid düzeni */
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.platform-grid .platform-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color) !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.platform-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.platform-grid .platform-item.selected {
+    border-color: var(--success-color);
+    background-color: var(--success-color-alpha) !important;
+}
+
+.platform-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+/* Şifre kartlarındaki butonlar */
+.btn-edit {
+    background-color: var(--warning-color);
+    color: var(--warning-text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.btn-delete {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Şifre gücü göstergesi */
+.strength-dots-container {
+    display: flex;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+.strength-dot-enhanced {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.strength-dot-enhanced.active {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .platform-grid {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 12px;
+    }
+
+    .platform-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .platform-item {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .platform-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 10px;
+    }
+
+    .platform-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .platform-item {
+        padding: 10px;
+    }
+}
+
+/* Passwords Container */
+.passwords-container {
+    flex: 1;
     background-color: var(--background-color);
     padding: 25px;
     display: flex;
     flex-direction: column;
-}
-
-.passwords-header {
-    margin-top: 0;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 10px;
-    flex: none;
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.passwords-header h2 {
-    margin: 0;
-    color: var(--text-color);
-    font-size: 22px;
     width: 100%;
-    text-align: center;
+    height: calc(100vh - 140px);
+    overflow: hidden;
 }
 
-.passwords-count {
-    position: absolute;
-    right: 15px;
-    top: 8px;
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 20px;
-}
-
-.passwords-content {
+.passwords-grid-container {
     flex: 1;
     overflow-y: auto;
+    padding-right: 10px;
 }
 
 .passwords-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    width: 100%;
+}
+
+/* Responsive Düzenlemeler */
+@media (max-width: 768px) {
+    .main-layout {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 80px);
+    }
+
+    .form-container {
+        flex: none;
+        max-width: none;
+        width: 100%;
+        min-width: unset;
+        padding: 15px;
+    }
+
+    .passwords-container {
+        flex: 1;
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 10px;
+        min-width: unset;
+        width: 100%;
+    }
+
+    .passwords-container {
+        padding: 10px;
+        width: 100%;
+    }
+}
+
+/* Grid ve Kartlar */
+.passwords-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 15px 0;
+    width: 100%;
+    max-width: 100%;
 }
 
 .card-custom {
-    height: fit-content;
-    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--surface-color);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    overflow: hidden;
 }
 
 .card-platform-header {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 
 .platform-icon-wrapper {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .platform-icon-size {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
 }
 
 .platform-title {
     margin: 0;
     color: var(--primary-color);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
+    word-break: break-word;
+}
+
+.card-text {
+    font-size: 12px;
+    margin: 5px 0;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+.card-password-text {
+    font-family: monospace;
+    font-size: 12px;
+    margin: 5px 0;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+.mini-buttons {
+    display: flex;
+    gap: 5px;
+    margin-top: auto;
+    flex-wrap: wrap;
+}
+
+.btn-mini {
+    padding: 4px 8px;
+    font-size: 11px;
+    min-width: auto;
+}
+
+@media (max-width: 768px) {
+    .passwords-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 10px;
+        padding: 8px;
+    }
+
+    .card-custom {
+        padding: 12px;
+    }
+
+    .platform-title {
+        font-size: 13px;
+    }
+
+    .card-text, .card-password-text {
+        font-size: 11px;
+    }
+
+    .btn-mini {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .passwords-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .card-custom {
+        padding: 12px;
+    }
+
+    .platform-title {
+        font-size: 12px;
+    }
+
+    .card-text, .card-password-text {
+        font-size: 11px;
+    }
+
+    .btn-mini {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+
+    .mini-buttons {
+        gap: 4px;
+    }
 }
 
 .empty-state {
@@ -680,17 +977,92 @@ aştığımız sorunlar yenilikle
 }
 
 .app-header {
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    padding: 20px;
-    text-align: center;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2xl) var(--space-2xl) 0;
+    background-color: transparent;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 0;
 }
 
 .app-title {
-    margin: 0;
-    font-size: 32px;
+    font-size: 2.5rem;
     font-weight: bold;
+    color: var(--success-color);
+    margin: 0;
+    text-align: center;
+    position: relative;
+    padding: 0 var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+    .app-title {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-title {
+        font-size: 2rem;
+    }
+}
+
+.theme-toggle {
+    position: absolute;
+    left: var(--space-2xl);
+    background: none;
+    border: 2px solid var(--border-color);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: var(--text-xl);
+    transition: var(--transition-normal);
+    background-color: var(--surface-color);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-btn {
+    position: absolute;
+    right: var(--space-2xl);
+    background: none;
+    border: 2px solid var(--danger-color);
+    padding: var(--space-md) var(--space-xl);
+    cursor: pointer;
+    font-size: var(--text-base);
+    transition: var(--transition-normal);
+    background-color: var(--danger-color);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    color: white;
+}
+
+.logout-btn:hover {
+    background-color: var(--danger-hover);
+    border-color: var(--danger-hover);
+    transform: var(--hover-lift-sm);
+}
+
+@media (max-width: 768px) {
+    .logout-btn {
+        right: var(--space-lg);
+        padding: var(--space-sm) var(--space-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .logout-btn {
+        right: var(--space-md);
+        padding: var(--space-xs) var(--space-md);
+    }
 }
 
 .modal-header-row {
@@ -725,10 +1097,9 @@ aştığımız sorunlar yenilikle
     align-items: center;
     gap: 12px;
     padding: 10px 12px;
-    background-color: var(--surface-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: var(--card-shadow);
+    background-color: var(--surface-color);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
 }
 
 .strength-info-form {
@@ -746,6 +1117,30 @@ aştığımız sorunlar yenilikle
     font-weight: bold;
     min-width: 60px;
     color: var(--strength-color);
+}
+
+.strength-dots-container {
+    display: flex;
+    gap: 4px;
+}
+
+.strength-dot-enhanced {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background-color: var(--border-color);
+    transition: var(--transition-normal);
+}
+
+.strength-dot-enhanced[data-dot-active="true"] {
+    background-color: var(--strength-color);
+    box-shadow: 0 0 8px var(--strength-color-alpha);
+}
+
+.strength-score-display {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-color);
 }
 
 /* ====== FORM & INPUT UTİLİTİES ====== */
@@ -817,6 +1212,15 @@ aştığımız sorunlar yenilikle
     width: 32px;
     height: 32px;
     font-size: 14px;
+    transition: var(--transition-normal);
+}
+
+.copy-btn-absolute:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.copy-btn-absolute:active {
+    transform: translateY(-50%) scale(0.98);
 }
 
 .strength-indicator-generated {
@@ -826,59 +1230,66 @@ aştığımız sorunlar yenilikle
 .strength-box-generated {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 12px 15px;
-    background-color: var(--surface-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    gap: 12px;
+    padding: 10px 12px;
+    background-color: var(--surface-color);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
 }
 
 .strength-info-generated {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .strength-text-generated {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
-    min-width: 70px;
+    min-width: 60px;
     color: var(--strength-color);
 }
 
 .strength-dots-generated {
     display: flex;
     gap: 4px;
-    flex: 1;
 }
 
 .strength-dot-generated {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background-color: #e9ecef;
-    transition: all 0.3s ease;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background-color: var(--border-color);
+    transition: var(--transition-normal);
 }
 
 .strength-dot-generated.active {
     background-color: var(--strength-color);
-    box-shadow: 0 0 6px var(--strength-color-alpha);
+    box-shadow: 0 0 8px var(--strength-color-alpha);
 }
 
 .strength-score-generated {
-    font-size: 12px;
-    color: var(--text-secondary);
-    font-weight: bold;
-    background-color: var(--surface-color);
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-color);
 }
 
 .modal-footer-buttons {
     display: flex;
     gap: 15px;
     justify-content: center;
+}
+
+.modal-footer-buttons button {
+    transition: var(--transition-fast);
+}
+
+.modal-footer-buttons button:hover {
+    transform: scale(1.05);
+}
+
+.modal-footer-buttons button:active {
+    transform: scale(0.98);
 }
 
 /* ====== MİNİ ŞİFRE GÜCÜ GÖSTERGESİ ====== */
@@ -1117,7 +1528,119 @@ aştığımız sorunlar yenilikle
     text-align: center;
 }
 
+.dashboard-container {
+    padding-top: 200px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
+.dashboard-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: var(--bg-color);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 160px;
+}
+
+.dashboard-header h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin: 10px 0 0 0;
+    padding-bottom: 10px;
+    position: relative;
+    top: 10px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.form-container,
+.passwords-container {
+    padding-top: 100px;
+}
+
+.form-container h2,
+.passwords-container h2 {
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    min-height: 40px;
+}
+
+@media (max-width: 1200px) {
+    .dashboard-container {
+        padding-top: 180px;
+    }
+
+    .dashboard-header {
+        margin-top: 140px;
+    }
+
+    .form-container,
+    .passwords-container {
+        padding-top: 90px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding-top: 160px;
+    }
+
+    .dashboard-header {
+        margin-top: 120px;
+        padding: 15px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .form-container,
+    .passwords-container {
+        padding-top: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container {
+        padding-top: 140px;
+    }
+
+    .dashboard-header {
+        margin-top: 100px;
+        padding: 10px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-buttons {
+        gap: 10px;
+    }
+
+    .form-container,
+    .passwords-container {
+        padding-top: 80px;
+    }
+}
 
 /* Platform Logo'ları için not */
 /* Platform logo'ları artık SVG içinde gerçek renklerle geliyor */
@@ -1197,9 +1720,10 @@ aştığımız sorunlar yenilikle
     }
     
     /* Form bölümü mobilde */
-    .form-section {
+    .form-section, .form-container {
         width: 100% !important;
-        flex-shrink: 0;
+        min-width: unset !important;
+        flex: none !important;
         max-height: 50vh;
         padding: 15px !important;
         overflow-y: auto !important;
@@ -1214,6 +1738,7 @@ aştığımız sorunlar yenilikle
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch;
         min-height: 0;
+        width: 100%;
     }
     
     /* Şifre kartları mobilde tek sütun */
@@ -1246,14 +1771,17 @@ aştığımız sorunlar yenilikle
 
 @media (max-width: 480px) {
     /* Küçük ekranlarda daha kompakt */
-    .form-section {
+    .form-section, .form-container {
         padding: 10px !important;
         max-height: 50vh;
+        width: 100% !important;
+        min-width: unset !important;
     }
     
     .passwords-section {
         padding: 10px !important;
         max-height: 60vh;
+        width: 100%;
     }
     
     /* Platform grid mobilde 2 sütun */
@@ -1571,5 +2099,151 @@ aştığımız sorunlar yenilikle
     
     .auth-title {
         font-size: 24px;
+    }
+}
+
+/* Responsive Düzenlemeler */
+.passwords-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 15px 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.card-custom {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--surface-color);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+    .passwords-grid {
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .card-custom {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .passwords-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 12px;
+    }
+
+    .card-custom {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .passwords-grid {
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .card-custom {
+        padding: 12px;
+    }
+}
+
+.btn-mini {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-mini:hover {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .btn-mini {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .btn-mini:hover {
+    color: white;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--surface-hover);
+    transform: scale(1.1);
+}
+
+[data-theme="dark"] .theme-toggle {
+    color: var(--text-color);
+}
+
+/* Auth sayfalarındaki dark mode butonu */
+.auth-header .theme-toggle {
+    position: absolute;
+    top: 20px;
+    left: calc(var(--space-2xl) + 260px);
+    background: none;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    color: var(--text-color);
+}
+
+.auth-header .theme-toggle:hover {
+    background-color: var(--surface-hover);
+    transform: scale(1.1);
+}
+
+[data-theme="dark"] .auth-header .theme-toggle {
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .auth-header .theme-toggle {
+        left: calc(var(--space-lg) + 180px);
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-header .theme-toggle {
+        left: calc(var(--space-md) + 120px);
     }
 }

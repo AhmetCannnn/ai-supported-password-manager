@@ -24,12 +24,12 @@ function App() {
       warning: '#ffc107',
       success: '#28a745',
       inputBg: '#ffffff',
-      cardShadow: '0 4px 20px rgba(0,0,0,0.1)',
+      cardShadow: '0 2px 8px rgba(0,0,0,0.05)',
       headerBg: '#ffffff'
     },
     dark: {
       background: '#1a1a1a',
-      surface: '#2d2d2d',
+      surface: '#1a1a1a',
       surfaceSecondary: '#3d3d3d',
       text: '#ffffff',
       textSecondary: '#e0e0e0',
@@ -40,8 +40,8 @@ function App() {
       danger: '#ef4444',
       warning: '#f59e0b',
       success: '#10b981',
-      inputBg: '#3d3d3d',
-      cardShadow: '0 4px 20px rgba(0,0,0,0.3)',
+      inputBg: '#1a1a1a',
+      cardShadow: '0 2px 8px rgba(0,0,0,0.15)',
       headerBg: '#2d2d2d'
     }
   }

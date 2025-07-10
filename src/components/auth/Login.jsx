@@ -134,16 +134,6 @@ function Login({ onLoginSuccess, onGoToRegister, theme, isDarkMode, toggleTheme 
         <button
           onClick={toggleTheme}
           className="theme-toggle"
-          style={{
-            border: `2px solid ${theme.border}`,
-            backgroundColor: theme.surface
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.backgroundColor = theme.surfaceSecondary;
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.backgroundColor = theme.surface;
-          }}
           title={isDarkMode ? 'Açık Tema' : 'Koyu Tema'}
         >
           {isDarkMode ? '☀️' : '🌙'}
