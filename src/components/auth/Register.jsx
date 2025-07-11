@@ -113,14 +113,14 @@ function Register({ onRegisterSuccess, onBackToLogin, theme, isDarkMode, toggleT
          <button
            onClick={toggleTheme}
            className="theme-toggle"
-           title={isDarkMode ? 'Açık Tema' : 'Koyu Tema'}
-         >
-           {isDarkMode ? '☀️' : '🌙'}
-         </button>
+          title={isDarkMode ? 'Açık Tema' : 'Koyu Tema'}
+        >
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
 
-         <h1 className="auth-title">
-           🔐 Şifre Yöneticisi Kayıt
-         </h1>
+        <h1 className="auth-title">
+          🔐 Şifre Yöneticisi Kayıt
+        </h1>
       </div>
 
       {/* Ana İçerik */}

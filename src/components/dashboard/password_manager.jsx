@@ -804,7 +804,7 @@ function App({ onLogout, theme, isDarkMode, toggleTheme }) {
 
                 {/* Kayıtlı Şifreler - Sağ Taraf */}
                 <div className="passwords-container">
-                    <h2>
+                        <h2>
                         <span>📋 Kayıtlı Şifreler</span>
                         <span className="passwords-count">
                             {passwords.length}
@@ -812,147 +812,147 @@ function App({ onLogout, theme, isDarkMode, toggleTheme }) {
                     </h2>
 
                     <div className="passwords-grid-container">
-                        {isLoading ? (
-                            <div className="empty-state">
-                                <div className="empty-icon">⏳</div>
-                                <p className="empty-title">
-                                    Şifreler yükleniyor...
-                                </p>
-                                <p className="empty-subtitle">
-                                    Lütfen bekleyin
-                                </p>
-                            </div>
-                        ) : passwords.length === 0 ? (
-                            <div className="empty-state">
+                    {isLoading ? (
+                        <div className="empty-state">
+                            <div className="empty-icon">⏳</div>
+                            <p className="empty-title">
+                                Şifreler yükleniyor...
+                            </p>
+                            <p className="empty-subtitle">
+                                Lütfen bekleyin
+                            </p>
+                        </div>
+                    ) : passwords.length === 0 ? (
+                        <div className="empty-state">
                                 <div className="empty-icon">🔒</div>
-                                <p className="empty-title">
+                            <p className="empty-title">
                                     Henüz şifre eklenmemiş
-                                </p>
-                                <p className="empty-subtitle">
+                            </p>
+                            <p className="empty-subtitle">
                                     Yeni şifre eklemek için formu kullanın
-                                </p>
-                            </div>
-                        ) : (
-                            <div className="passwords-grid">
-                                {passwords.map(item => (
-                                    <div
-                                        key={item.id}
-                                        className="card card-custom"
-                                    >
-                                        {/* Platform Başlığı */}
-                                        <div className="card-header">
-                                            <div className="card-platform-header">
-                                                <span className="platform-icon-wrapper">
-                                                    {(() => {
-                                                        const platform = popularPlatforms.find(p => p.name === item.title);
-                                                        if (platform) {
-                                                            return (
-                                                                <div 
-                                                                    className="platform-icon-size"
-                                                                    dangerouslySetInnerHTML={{ __html: platform.svg }}
-                                                                />
-                                                            );
-                                                        }
-                                                        return <span className="text-2xl">🔗</span>;
-                                                    })()}
-                                                </span>
-                                                <h3 className="platform-title">
-                                                    {item.title}
-                                                </h3>
-                                            </div>
-
-                                            {/* Mini 5 Noktalı Şifre Gücü Göstergesi */}
-                                            <div className="mini-strength-indicator">
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="passwords-grid">
+                            {passwords.map(item => (
+                                <div
+                                    key={item.id}
+                                    className="card card-custom"
+                                >
+                                    {/* Platform Başlığı */}
+                                    <div className="card-header">
+                                        <div className="card-platform-header">
+                                            <span className="platform-icon-wrapper">
                                                 {(() => {
-                                                    const strength = calculatePasswordStrength(decryptPassword(item.password_encrypted));
-                                                    const filledDots = Math.ceil((strength.score / 100) * 5);
-                                                    return Array.from({ length: 5 }, (_, index) => (
-                                                        <div
-                                                            key={index}
-                                                            className={`mini-strength-dot ${index < filledDots ? 'active' : ''}`}
-                                                            data-strength-color={strength.color}
-                                                        />
-                                                    ));
+                                                    const platform = popularPlatforms.find(p => p.name === item.title);
+                                                    if (platform) {
+                                                        return (
+                                                            <div 
+                                                                className="platform-icon-size"
+                                                                dangerouslySetInnerHTML={{ __html: platform.svg }}
+                                                            />
+                                                        );
+                                                    }
+                                                    return <span className="text-2xl">🔗</span>;
                                                 })()}
-                                            </div>
+                                            </span>
+                                            <h3 className="platform-title">
+                                                {item.title}
+                                            </h3>
                                         </div>
 
-                                        {/* Kullanıcı Bilgileri */}
-                                        <div className="card-body">
-                                            {/* Kullanıcı Adı Satırı */}
-                                            <div className="card-row">
-                                                <div className="card-info-left">
-                                                    <span className="card-icon">👤</span>
-                                                    <span className="card-text">
-                                                        {item.username}
-                                                    </span>
-                                                </div>
-                                                
-                                                {/* Buton Container - Şifre satırıyla aynı */}
-                                                <div className="mini-buttons">
-                                                    {/* Boş alan (göz butonunun yerine) */}
-                                                    <div className="spacer-btn"></div>
-                                                    
-                                                    {/* Kullanıcı Adı Kopyalama Butonu */}
-                                                    <button
-                                                        onClick={() => handleCopyUsername(item.username, item.id)}
-                                                        className={`btn-mini ${copiedUsernames[item.id] ? 'btn-mini-copied' : ''}`}
-                                                        title={copiedUsernames[item.id] ? 'Kopyalandı!' : 'Kullanıcı adını kopyala'}
-                                                    >
-                                                        {copiedUsernames[item.id] ? '✅' : '📄'}
-                                                    </button>
-                                                </div>
+                                        {/* Mini 5 Noktalı Şifre Gücü Göstergesi */}
+                                        <div className="mini-strength-indicator">
+                                            {(() => {
+                                                const strength = calculatePasswordStrength(decryptPassword(item.password_encrypted));
+                                                const filledDots = Math.ceil((strength.score / 100) * 5);
+                                                return Array.from({ length: 5 }, (_, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className={`mini-strength-dot ${index < filledDots ? 'active' : ''}`}
+                                                        data-strength-color={strength.color}
+                                                    />
+                                                ));
+                                            })()}
+                                        </div>
+                                    </div>
+
+                                    {/* Kullanıcı Bilgileri */}
+                                    <div className="card-body">
+                                        {/* Kullanıcı Adı Satırı */}
+                                        <div className="card-row">
+                                            <div className="card-info-left">
+                                                <span className="card-icon">👤</span>
+                                                <span className="card-text">
+                                                    {item.username}
+                                                </span>
                                             </div>
                                             
-                                            {/* Şifre Satırı */}
-                                            <div className="card-row-no-margin">
-                                                <div className="card-info-left">
-                                                    <span className="card-icon">🔑</span>
-                                                    <span className={`card-password-text ${!visiblePasswords[item.id] ? 'card-password-hidden' : ''}`}>
-                                                        {visiblePasswords[item.id] ? decryptPassword(item.password_encrypted) : '•'.repeat(Math.min(decryptPassword(item.password_encrypted).length, 12))}
-                                                    </span>
-                                                </div>
+                                            {/* Buton Container - Şifre satırıyla aynı */}
+                                            <div className="mini-buttons">
+                                                {/* Boş alan (göz butonunun yerine) */}
+                                                <div className="spacer-btn"></div>
                                                 
-                                                {/* Mini Butonlar */}
-                                                <div className="mini-buttons">
-                                                    <button
-                                                        onClick={() => togglePasswordVisibility(item.id)}
-                                                        className={`btn-mini ${visiblePasswords[item.id] ? 'btn-mini-visible' : ''}`}
-                                                        title={visiblePasswords[item.id] ? 'Şifreyi gizle' : 'Şifreyi göster'}
-                                                    >
-                                                        {visiblePasswords[item.id] ? '🙈' : '👁'}
-                                                    </button>
-                                                    
-                                                    <button
-                                                        onClick={() => handleCopyPassword(item.password_encrypted, item.id)}
-                                                        className={`btn-mini ${copiedPasswords[item.id] ? 'btn-mini-copied' : ''}`}
-                                                        title={copiedPasswords[item.id] ? 'Kopyalandı!' : 'Şifreyi kopyala'}
-                                                    >
-                                                        {copiedPasswords[item.id] ? '✅' : '📄'}
-                                                    </button>
-                                                </div>
+                                                {/* Kullanıcı Adı Kopyalama Butonu */}
+                                                <button
+                                                    onClick={() => handleCopyUsername(item.username, item.id)}
+                                                    className={`btn-mini ${copiedUsernames[item.id] ? 'btn-mini-copied' : ''}`}
+                                                    title={copiedUsernames[item.id] ? 'Kopyalandı!' : 'Kullanıcı adını kopyala'}
+                                                >
+                                                    {copiedUsernames[item.id] ? '✅' : '📄'}
+                                                </button>
                                             </div>
                                         </div>
                                         
-                                        {/* Butonlar */}
-                                        <div className="card-footer">
-                                            <button
-                                                onClick={() => handleEdit(item)}
-                                                className="btn btn-warning btn-sm card-footer-buttons"
-                                            >
-                                                ✏️ Düzenle
-                                            </button>
-                                            <button
-                                                onClick={() => handleDelete(item.id)}
-                                                className="btn btn-danger btn-sm card-footer-buttons"
-                                            >
-                                                🗑️ Sil
-                                            </button>
+                                        {/* Şifre Satırı */}
+                                        <div className="card-row-no-margin">
+                                            <div className="card-info-left">
+                                                <span className="card-icon">🔑</span>
+                                                <span className={`card-password-text ${!visiblePasswords[item.id] ? 'card-password-hidden' : ''}`}>
+                                                    {visiblePasswords[item.id] ? decryptPassword(item.password_encrypted) : '•'.repeat(Math.min(decryptPassword(item.password_encrypted).length, 12))}
+                                                </span>
+                                            </div>
+                                            
+                                            {/* Mini Butonlar */}
+                                            <div className="mini-buttons">
+                                                <button
+                                                    onClick={() => togglePasswordVisibility(item.id)}
+                                                    className={`btn-mini ${visiblePasswords[item.id] ? 'btn-mini-visible' : ''}`}
+                                                    title={visiblePasswords[item.id] ? 'Şifreyi gizle' : 'Şifreyi göster'}
+                                                >
+                                                    {visiblePasswords[item.id] ? '🙈' : '👁'}
+                                                </button>
+                                                
+                                                <button
+                                                    onClick={() => handleCopyPassword(item.password_encrypted, item.id)}
+                                                    className={`btn-mini ${copiedPasswords[item.id] ? 'btn-mini-copied' : ''}`}
+                                                    title={copiedPasswords[item.id] ? 'Kopyalandı!' : 'Şifreyi kopyala'}
+                                                >
+                                                    {copiedPasswords[item.id] ? '✅' : '📄'}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        )}
+                                    
+                                    {/* Butonlar */}
+                                    <div className="card-footer">
+                                        <button
+                                            onClick={() => handleEdit(item)}
+                                            className="btn btn-warning btn-sm card-footer-buttons"
+                                        >
+                                            ✏️ Düzenle
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(item.id)}
+                                            className="btn btn-danger btn-sm card-footer-buttons"
+                                        >
+                                            🗑️ Sil
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                     </div>
                 </div>
             </div>
