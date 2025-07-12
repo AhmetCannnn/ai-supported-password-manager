@@ -1,8 +1,12 @@
 import { useState } from 'react'
-import { supabase } from '../../services/supabaseClient'
-import '../../styles/components.css'
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../services/supabaseClient'
+import '../styles/components.css'
 
 function Register({ onRegisterSuccess, onBackToLogin, theme, isDarkMode, toggleTheme }) {
+  onRegisterSuccess = onRegisterSuccess || (() => {});
+  const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState("");
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -42,7 +46,8 @@ function Register({ onRegisterSuccess, onBackToLogin, theme, isDarkMode, toggleT
     return btoa(password + 'secret_salt_key_2024')
   }
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
     if (!validateForm()) return;
     
     setIsLoading(true);
@@ -77,16 +82,12 @@ function Register({ onRegisterSuccess, onBackToLogin, theme, isDarkMode, toggleT
         console.log('Kullanıcı başarıyla kaydedildi:', data);
         
         // Kullanıcı bilgilerini localStorage'a kaydet
-        localStorage.setItem('currentUser', JSON.stringify({
-          id: data[0].id,
-          email: data[0].email,
-          fullName: data[0].full_name
-        }));
         
-        // 1.5 saniye sonra başarı sayfasına geç
+        setSuccessMessage("Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...");
         setTimeout(() => {
-          onRegisterSuccess();
+          navigate('/login');
         }, 1500);
+        return;
       }
     } catch (err) {
       console.error('Beklenmeyen hata:', err);
@@ -95,6 +96,14 @@ function Register({ onRegisterSuccess, onBackToLogin, theme, isDarkMode, toggleT
       setIsLoading(false);
     }
   }
+
+  const goToLogin = () => {
+    if (onBackToLogin) {
+      onBackToLogin();
+    } else {
+      navigate('/login');
+    }
+  };
 
   return (
     <div 
@@ -164,7 +173,13 @@ function Register({ onRegisterSuccess, onBackToLogin, theme, isDarkMode, toggleT
             </div>
           )}
 
-          <form onSubmit={(e) => { e.preventDefault(); handleRegister(); }}>
+          {successMessage && (
+            <div className="auth-success" style={{ color: theme.success, marginBottom: 16 }}>
+              {successMessage}
+            </div>
+          )}
+
+          <form onSubmit={(e) => { e.preventDefault(); handleRegister(e); }}>
             {/* Ad Soyad Alanı */}
             <div className="auth-form-group">
               <label 
@@ -336,7 +351,7 @@ function Register({ onRegisterSuccess, onBackToLogin, theme, isDarkMode, toggleT
             <div className="auth-switch">
               <button 
                 type="button" 
-                onClick={onBackToLogin} 
+                onClick={goToLogin} 
                 className="auth-switch-link"
                 style={{ color: theme.primary }}
                 onMouseEnter={(e) => {

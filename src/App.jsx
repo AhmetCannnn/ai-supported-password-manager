@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
-import Login from './components/auth/Login.jsx'
-import Register from './components/auth/Register.jsx'
-import PasswordManager from './components/dashboard/password_manager.jsx'
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [currentPage, setCurrentPage] = useState('login') // 'login' veya 'register'
   const [isDarkMode, setIsDarkMode] = useState(false)
 
   // Tema renklerini tanımla
@@ -99,54 +96,14 @@ function App() {
 
   const currentTheme = isDarkMode ? theme.dark : theme.light
 
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true)
-  }
-
-  const handleRegisterSuccess = () => {
-    setIsLoggedIn(true)
-  }
-
-  const handleLogout = () => {
-    setIsLoggedIn(false)
-    setCurrentPage('login')
-  }
-
-  const goToRegister = () => {
-    setCurrentPage('register')
-  }
-
-  const goToLogin = () => {
-    setCurrentPage('login')
-  }
-
   return (
-    <div style={{ backgroundColor: currentTheme.background, minHeight: '100vh' }}>
-      {isLoggedIn ? (
-        <PasswordManager 
-          onLogout={handleLogout} 
-          theme={currentTheme}
-          isDarkMode={isDarkMode}
-          toggleTheme={toggleTheme}
-        />
-      ) : currentPage === 'login' ? (
-        <Login 
-          onLoginSuccess={handleLoginSuccess} 
-          onGoToRegister={goToRegister}
-          theme={currentTheme}
-          isDarkMode={isDarkMode}
-          toggleTheme={toggleTheme}
-        />
-      ) : (
-        <Register 
-          onRegisterSuccess={handleRegisterSuccess} 
-          onBackToLogin={goToLogin}
-          theme={currentTheme}
-          isDarkMode={isDarkMode}
-          toggleTheme={toggleTheme}
-        />
-      )}
-    </div>
+    <BrowserRouter>
+      <AppRoutes 
+        theme={currentTheme}
+        isDarkMode={isDarkMode}
+        toggleTheme={toggleTheme}
+      />
+    </BrowserRouter>
   )
 }
 

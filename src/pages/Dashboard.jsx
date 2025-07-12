@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../../services/supabaseClient'
-import { generateAIPassword } from '../../services/geminiClient'
-import '../../styles/components.css'
-import { popularPlatforms } from '../../data/platforms'
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../services/supabaseClient'
+import { generateAIPassword } from '../services/geminiClient'
+import '../styles/components.css'
+import { popularPlatforms } from '../data/platforms'
 
 
-function App({ onLogout, theme, isDarkMode, toggleTheme }) {
+function App({ theme, isDarkMode, toggleTheme }) {
 
     const [passwords, setPasswords] = useState([]) // Şifreleri tutacak state
     const [editingId, setEditingId] = useState(null) // Düzenleme modunda hangi şifrenin düzenleneceğini tutacak state
@@ -568,6 +569,13 @@ function App({ onLogout, theme, isDarkMode, toggleTheme }) {
         }
     }
 
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('currentUser');
+        navigate('/login');
+    };
+
     return (
         <div className="app-container">
             {/* Başlık Bölümü */}
@@ -587,22 +595,7 @@ function App({ onLogout, theme, isDarkMode, toggleTheme }) {
                 
                 {/* Çıkış Butonu */}
                 <button
-                    onClick={() => {
-                        // localStorage'ı temizle
-                        localStorage.removeItem('currentUser');
-                        // State'leri temizle
-                        setCurrentUser(null);
-                        setPasswords([]);
-                        setFormData({ title: '', username: '', password: '' });
-                        setEditingId(null);
-                        setSelectedPlatform('');
-                        setIsCustomPlatform(false);
-                        setVisiblePasswords({});
-                        setCopiedPasswords({});
-                        setCopiedUsernames({});
-                        // Çıkış yap
-                        onLogout();
-                    }}
+                    onClick={handleLogout}
                     className="logout-btn"
                     title="Çıkış Yap"
                 >

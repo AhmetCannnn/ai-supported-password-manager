@@ -1,24 +1,30 @@
-import { useState } from 'react'
-import { supabase } from '../../services/supabaseClient'
-import '../../styles/components.css'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../services/supabaseClient'
+import '../styles/components.css'
 
-function Login({ onLoginSuccess, onGoToRegister, theme, isDarkMode, toggleTheme }) {
+function Login({ onGoToRegister, theme, isDarkMode, toggleTheme }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
- 
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  // Eğer kullanıcı zaten girişliyse otomatik olarak dashboard'a yönlendir
+  useEffect(() => {
+    const user = localStorage.getItem('currentUser');
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
 
   const update_email = (e) => {
     setEmail(e.target.value);
-    // Email değiştiğinde hata mesajını temizle
     if (errors.email) {
       setErrors(prev => ({ ...prev, email: '' }));
     }
-    // Giriş hatası mesajını temizle
     if (loginError) {
       setLoginError("");
     }
@@ -26,11 +32,9 @@ function Login({ onLoginSuccess, onGoToRegister, theme, isDarkMode, toggleTheme 
 
   const update_password = (e) => {
     setPassword(e.target.value);
-    // Şifre değiştiğinde hata mesajını temizle
     if (errors.password) {
       setErrors(prev => ({ ...prev, password: '' }));
     }
-    // Giriş hatası mesajını temizle
     if (loginError) {
       setLoginError("");
     }
@@ -38,26 +42,20 @@ function Login({ onLoginSuccess, onGoToRegister, theme, isDarkMode, toggleTheme 
 
   const validateForm = () => {
     const newErrors = {};
-
-    // Email validasyonu
     if (!email) {
       newErrors.email = "E-posta adresi gereklidir.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = "Geçerli bir e-posta giriniz.";
     }
-
-    // Şifre validasyonu
     if (!password) {
       newErrors.password = "Şifre gereklidir.";
     } else if (password.length < 3) {
       newErrors.password = "Şifre 3 karakterden uzun olmalıdır.";
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }
 
-  // Basit password hash fonksiyonu (Register.jsx ile aynı)
   const hashPassword = (password) => {
     return btoa(password + 'secret_salt_key_2024')
   }
@@ -66,42 +64,29 @@ function Login({ onLoginSuccess, onGoToRegister, theme, isDarkMode, toggleTheme 
     if (!validateForm()) {
       return;
     }
-
     setIsLoading(true);
-    setLoginError(""); // Önceki hataları temizle
-
+    setLoginError("");
     try {
-      // Supabase'den kullanıcıyı ara
       const { data, error } = await supabase
         .from('users')
         .select('*')
         .eq('email', email.toLowerCase().trim())
         .single();
-
       if (error || !data) {
-        // Kullanıcı bulunamadı
         setLoginError("E-posta veya şifre hatalı. Lütfen tekrar deneyin.");
       } else {
-        // Kullanıcı bulundu, şifreyi kontrol et
         const hashedInputPassword = hashPassword(password);
-        
         if (hashedInputPassword === data.password_hash) {
-          // Şifre doğru, giriş başarılı
           console.log('Giriş başarılı:', data);
-          
-          // Kullanıcı bilgilerini localStorage'a kaydet (opsiyonel)
           localStorage.setItem('currentUser', JSON.stringify({
             id: data.id,
             email: data.email,
             fullName: data.full_name
           }));
-          
-          // 1.5 saniye sonra şifre yöneticisine geç
           setTimeout(() => {
-            onLoginSuccess();
+            navigate('/dashboard');
           }, 1500);
         } else {
-          // Şifre yanlış
           setLoginError("E-posta veya şifre hatalı. Lütfen tekrar deneyin.");
         }
       }
@@ -116,6 +101,14 @@ function Login({ onLoginSuccess, onGoToRegister, theme, isDarkMode, toggleTheme 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   }
+
+  const goToRegister = () => {
+    if (onGoToRegister) {
+      onGoToRegister();
+    } else {
+      navigate('/register');
+    }
+  };
 
   return (
     <div 
@@ -312,7 +305,7 @@ function Login({ onLoginSuccess, onGoToRegister, theme, isDarkMode, toggleTheme 
           <div className="auth-switch">
             <button
               type="button"
-              onClick={onGoToRegister}
+              onClick={goToRegister}
               className="auth-switch-link"
               style={{ color: theme.primary }}
               onMouseEnter={(e) => {
